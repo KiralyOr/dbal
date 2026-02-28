@@ -2,8 +2,8 @@
 
 import pytest
 
-from fx.client import MockCurrencyLayerClient
-from fx.store import ensure_fx_schema, store_rates
+from dbal.task3_fx.client import MockCurrencyLayerClient
+from dbal.task3_fx.store import ensure_fx_schema, store_rates
 
 
 class TestMockClient:

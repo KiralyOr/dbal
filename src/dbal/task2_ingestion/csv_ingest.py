@@ -5,8 +5,8 @@ import logging
 from datetime import datetime
 from pathlib import Path
 
-from dbal.service import DatabaseService
-from ingestion.schema import (
+from dbal.task1_database.service import DatabaseService
+from dbal.task2_ingestion.schema import (
     USAGE_COLUMNS,
     USAGE_CONFLICT_COLUMNS,
     USAGE_TABLE,

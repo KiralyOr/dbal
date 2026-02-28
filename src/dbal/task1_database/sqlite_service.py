@@ -6,8 +6,8 @@ from contextlib import contextmanager
 from queue import Empty, Queue
 from typing import Any, Iterator
 
-from dbal.service import DatabaseService
-from dbal.types import Params, ParamsList
+from dbal.task1_database.service import DatabaseService
+from dbal.task1_database.types import Params, ParamsList
 
 
 class SQLiteDatabaseService(DatabaseService):

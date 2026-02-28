@@ -10,8 +10,8 @@ import os
 import sys
 
 from dbal import create_service
-from fx.client import CurrencyLayerClient, MockCurrencyLayerClient
-from fx.store import ensure_fx_schema, store_rates
+from dbal.task3_fx.client import CurrencyLayerClient, MockCurrencyLayerClient
+from dbal.task3_fx.store import ensure_fx_schema, store_rates
 
 logging.basicConfig(
     level=logging.INFO,

@@ -20,8 +20,8 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["src", "."]
-include = ["dbal*", "ingestion*", "fx*", "scripts*"]
+where = ["src"]
+include = ["dbal*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

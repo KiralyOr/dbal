@@ -1,7 +1,7 @@
 """Database Abstraction Layer — factory and public API."""
 
-from dbal.service import DatabaseService
-from dbal.sqlite_service import SQLiteDatabaseService
+from dbal.task1_database.service import DatabaseService
+from dbal.task1_database.sqlite_service import SQLiteDatabaseService
 
 
 def create_service(db_url: str, pool_size: int = 4) -> DatabaseService:
@@ -16,7 +16,7 @@ def create_service(db_url: str, pool_size: int = 4) -> DatabaseService:
         path = db_url.split(":///", 1)[1] if ":///" in db_url else ":memory:"
         return SQLiteDatabaseService(path, pool_size)
     elif db_url.startswith("postgresql"):
-        from dbal.postgres_service import PostgresDatabaseService
+        from dbal.task1_database.postgres_service import PostgresDatabaseService
 
         return PostgresDatabaseService(db_url, pool_size)
     else:

@@ -8,8 +8,8 @@ from typing import Any, Iterator
 import psycopg2
 import psycopg2.extras
 
-from dbal.service import DatabaseService
-from dbal.types import Params, ParamsList
+from dbal.task1_database.service import DatabaseService
+from dbal.task1_database.types import Params, ParamsList
 
 
 class PostgresDatabaseService(DatabaseService):

@@ -8,7 +8,7 @@ import argparse
 import logging
 
 from dbal import create_service
-from ingestion.csv_ingest import ingest_csv
+from dbal.task2_ingestion.csv_ingest import ingest_csv
 
 logging.basicConfig(
     level=logging.INFO,

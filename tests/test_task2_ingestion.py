@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from ingestion.csv_ingest import ingest_csv, parse_date, parse_row
+from dbal.task2_ingestion.csv_ingest import ingest_csv, parse_date, parse_row
 
 
 class TestParseHelpers:

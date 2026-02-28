@@ -25,14 +25,13 @@ Business logic depends only on the abstract `DatabaseService` interface. Swappin
 
 ```
 src/dbal/
-  database/          # Connection management, transactions, pooling
-  ingestion/         # Chunked CSV reader and ingestion orchestrator
-  fx/                # CurrencyLayer API client and rate storage
-  schema/            # Table DDL (usage, fx_rates)
-scripts/             # CLI entry points
-tests/               # Test suite
-data/                # Sample data files
-docs/                # Design documentation
+  task1_database/      # Task 1: Database service (ABC + SQLite/PostgreSQL backends)
+  task2_ingestion/     # Task 2: Chunked CSV ingestion with idempotency
+  task3_fx/            # Task 3: CurrencyLayer API client and rate storage
+scripts/               # CLI entry points
+tests/                 # Test suite
+docs/                  # Design documentation (including Task 4: production behavior)
+data/                  # Sample data files
 ```
 
 ## Setup
@@ -58,7 +57,7 @@ python -m scripts.ingest_csv --db-url sqlite:///data.db --file data/usage_data.c
 ### Fetch FX rates
 
 ```bash
-python -m scripts.fetch_rates --db-url sqlite:///data.db --date 2021-10-01 --currencies ILS EUR GBP
+python -m scripts.fetch_rates --db-url sqlite:///data.db --date 2021-10-01 --currencies ILS EUR GBP --mock
 ```
 
 ## Running Tests

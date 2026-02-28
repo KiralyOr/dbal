@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from contextlib import contextmanager
 from typing import Any, Iterator
 
-from dbal.types import Params, ParamsList
+from dbal.task1_database.types import Params, ParamsList
 
 
 class DatabaseService(ABC):
