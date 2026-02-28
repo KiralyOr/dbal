@@ -4,13 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Python home assignment implementing a **database abstraction layer (DBAL)** for a Senior Data Engineer role. The project is greenfield — only the assignment doc (`Home assignment_DE.docx.md`) and sample data (`Data for Home Assignment - Data Engineer.csv`) exist at the start.
+A Python **database abstraction layer (DBAL)** package providing connection management, transactions, batch inserts, upserts, concurrency safety, and multi-DB extensibility. The package includes:
 
-The assignment has four tasks:
-1. **Database Service** — Python package with connection management, transactions, batch inserts, upserts, concurrency safety, and multi-DB extensibility
+1. **Database Service** — Abstract interface with SQLite backend (PostgreSQL-ready)
 2. **CSV Ingestion** — Streaming ingestion of usage data (up to 20M rows) with idempotency and crash safety
 3. **FX Rate Fetching** — CurrencyLayer API integration storing ILS/EUR/GBP rates, idempotent and secrets-free
-4. **Production Behavior & Observability** — Written explanations of SIGTERM handling, mid-transaction drops, parallel instances, and data quality signals
 
 ## Architecture
 
@@ -20,7 +18,7 @@ The assignment has four tasks:
 - **Database-agnostic**: Business logic depends on an abstract interface, not a concrete DB engine
 - **Streaming**: CSV ingestion processes chunks (e.g., 10k rows) to support 20M-row files without OOM
 
-### Expected Package Structure
+### Package Structure
 ```
 src/dbal/
   database/
@@ -41,7 +39,14 @@ scripts/
   ingest_csv.py      # CLI entry point for CSV ingestion
   fetch_rates.py     # CLI entry point for FX rate fetching
 tests/
-pyproject.toml       # or setup.py
+data/
+  usage_data.csv     # Sample usage data
+docs/
+  requirements.md    # Original requirements spec
+  database_service.md
+  csv_ingestion.md
+  fx_rates.md
+pyproject.toml
 .env.example         # DB_URL, CURRENCY_LAYER_API_KEY, etc.
 ```
 
@@ -55,8 +60,6 @@ Columns: `Date_`, `Bill_ID`, `Currency`, `Name`, `Product1 revenue`, `Product2 r
 - Currencies include USD, ILS, EUR, GBP
 
 ## Commands
-
-Once the project is set up, typical commands will be:
 
 ```bash
 # Install dependencies
@@ -75,7 +78,7 @@ ruff check src/ tests/
 black src/ tests/
 
 # Ingest CSV
-python scripts/ingest_csv.py --file "Data for Home Assignment - Data Engineer.csv"
+python scripts/ingest_csv.py --file data/usage_data.csv
 
 # Fetch FX rates
 python scripts/fetch_rates.py --date 2021-10-01 --currencies ILS EUR GBP
@@ -84,11 +87,3 @@ python scripts/fetch_rates.py --date 2021-10-01 --currencies ILS EUR GBP
 Environment variables (use `.env` file, never commit secrets):
 - `DB_URL` — SQLAlchemy connection string
 - `CURRENCY_LAYER_API_KEY` — CurrencyLayer API key
-
-## Assignment Deliverables
-
-Each task requires both **code** and a **written explanation**. The explanations cover:
-- Task 1: Multi-DB extension points, statelessness rationale, transaction boundaries
-- Task 2: Duplication scenarios, prevention strategy, DB-level guarantees, transaction scope, mid-batch crash behavior
-- Task 3: Retry safety, idempotency guarantee, crash-during-insertion behavior
-- Task 4: SIGTERM handling, connection drop behavior, parallel instance safety, observability signals
