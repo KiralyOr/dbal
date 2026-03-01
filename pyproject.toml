@@ -25,6 +25,10 @@ include = ["dbal*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-m 'not e2e'"
+markers = [
+    "e2e: end-to-end tests requiring Docker Compose (PostgreSQL)",
+]
 
 [tool.ruff]
 line-length = 100

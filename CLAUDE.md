@@ -91,6 +91,25 @@ python -m scripts.ingest_csv --db-url sqlite:///data.db --file data/usage_data.c
 python -m scripts.fetch_rates --db-url sqlite:///data.db --date 2021-10-01 --currencies ILS EUR GBP --mock
 ```
 
+## E2E Tests (PostgreSQL)
+
+E2E tests run against a real PostgreSQL 16 instance via Podman. They are marked with `@pytest.mark.e2e` and **excluded** from regular `pytest` runs (via `addopts = "-m 'not e2e'"` in `pyproject.toml`).
+
+```bash
+# 1. Start PostgreSQL (port 5433, db: dbal_test, user/pass: dbal/dbal)
+podman-compose up -d
+
+# 2. Run e2e tests
+pytest -m e2e -v
+
+# 3. Tear down
+podman-compose down
+```
+
+- `pytest` (no flags) runs only the 18 SQLite unit tests — no Podman needed.
+- `pytest -m e2e` runs only the 5 PostgreSQL e2e tests.
+- `pytest -m e2e --override-ini="addopts="` can be used to run all tests together.
+
 Environment variables (use `.env` file, never commit secrets):
 - `DB_URL` — SQLAlchemy connection string
 - `CURRENCY_LAYER_API_KEY` — CurrencyLayer API key

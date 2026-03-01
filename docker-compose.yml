@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: dbal_test
+      POSTGRES_USER: dbal
+      POSTGRES_PASSWORD: dbal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbal -d dbal_test"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
